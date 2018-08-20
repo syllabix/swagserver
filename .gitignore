@@ -10,3 +10,9 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+.DS_STORE
+
+# Folders created when running the build script
+node_modules
+tmp
