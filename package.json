@@ -1,0 +1,10 @@
+{
+    "name": "swagserver-build-tools",
+    "description": "A simple package intended to be used in the context of the swagserver build",
+    "version": "1.0.0",
+    "lockfileVersion": 1,
+    "requires": true,
+    "devDependencies": {
+        "swagger-ui-dist": "^3.18.1"
+    }
+}
