@@ -1,4 +1,6 @@
-# swagserver [![Go Report Card](https://goreportcard.com/badge/github.com/syllabix/swagserver)](https://goreportcard.com/report/github.com/syllabix/swagserver)
+# swagserver
+[![Go Report Card](https://goreportcard.com/badge/github.com/syllabix/swagserver)](https://goreportcard.com/report/github.com/syllabix/swagserver)
+
 Middleware used to serve swagger ui with go-swagger generated api servers
 
 ## Usage

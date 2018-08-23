@@ -45,13 +45,21 @@ var (
 	}
 )
 
-func handleError(err error) {
-	if err != nil {
-		log.Fatal("An error occurred while initializing swagserver middlware:", err)
-	}
-}
+const (
+	initializationError = `
+		An error occurred while initializing swagserver middlware.
+		This is most likely a problem with the swagserver package itself.
+		Please file an issue on github @ github.com/syllabix/swagserver`
+)
 
 func init() {
+
+	handleError := func(err error) {
+		if err != nil {
+			log.Fatal(initializationError, err)
+		}
+	}
+
 	statikFs, err := fs.New()
 	handleError(err)
 
@@ -99,11 +107,11 @@ func New(config ...Config) Middleware {
 	handler.specURL = cfg.SwaggerSpecURL
 
 	return func(next http.Handler) http.Handler {
-		return serveSwagger(next, cfg.SwaggerSpecURL)
+		return serveSwagger(next)
 	}
 }
 
-func serveSwagger(next http.Handler, swaggerURL string) http.HandlerFunc {
+func serveSwagger(next http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if shouldServeSwagger(r.URL) {
 			handler.ServeHTTP(w, r)
