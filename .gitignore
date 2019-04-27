@@ -13,6 +13,7 @@
 
 .DS_STORE
 
-# Folders created when running the build script
+# artifacts created when running the build script
 node_modules
+package-lock.json
 tmp
