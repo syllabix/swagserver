@@ -52,7 +52,7 @@ func setup() (fileserver http.Handler, tmpl *template.Template, err error) {
 // New is the factory constructor for intializing a middleware
 // using config.Option funcs to override defaults settings
 func New(options ...config.Option) Middleware {
-	handler, settings := handlerSettings(options...)
+	handler, settings := handlerAndSettings(options...)
 
 	shouldServe := func(url *url.URL) bool {
 		return settings.ShouldRender &&
@@ -73,11 +73,11 @@ func New(options ...config.Option) Middleware {
 // NewHandler returns an http.Handler that serves the swagger UI. This
 // constructor ignores the `Path` option
 func NewHandler(options ...config.Option) http.Handler {
-	handler, _ := handlerSettings(options...)
+	handler, _ := handlerAndSettings(options...)
 	return handler
 }
 
-func handlerSettings(options ...config.Option) (http.Handler, config.Settings) {
+func handlerAndSettings(options ...config.Option) (http.Handler, config.Settings) {
 	fileserver, template, err := setup()
 	if err != nil {
 		log.Fatal(fatalMsg, err)
