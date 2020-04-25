@@ -1,15 +1,55 @@
 # swagserver
 [![Go Report Card](https://goreportcard.com/badge/github.com/syllabix/swagserver)](https://goreportcard.com/report/github.com/syllabix/swagserver)
 
-A simple middleware that serves swagger ui using a valid Open API json specification document.
-
-The middleware func is typed using the common convention `func(next http.Handler) http.Handler` - which should make it pluggable into most Go web frameworks.
+Swagserver is a simple project designed to serve your swagger ui using a valid specification file. It can be added as a middleware or registered as a dedicated http handler. It was intially built to be using with [go swagger](https://github.com/go-swagger/go-swagger) generated servers - but should be pluggable with with most routing frameworks.
 
 ## Setup and usage
 
-```go get github.com/syllabix/swagserver```
+```
+go get github.com/syllabix/swagserver
+```
 
-Initialize an instance of swag server middleware with various options.
+### As a handler with a go swagger generated API
+
+```
+func main() {
+
+	// initialize a new swag server handler
+	swagger := swagserver.NewHandler(
+		option.SwaggerSpecURL("/swagger.json"),
+		option.Theme(theme.Muted),
+		option.Path("/docs/"),
+	)
+
+	// initialize your go swagger server
+	spec, err := loads.Analyzed(rest.FlatSwaggerJSON, "")
+	if err != nil {
+		log.Fatal("nope... not this time", err)
+	}
+	api := operation.NewAwesomeAPI(spec)
+	api.JSONConsumer = runtime.JSONConsumer()
+	api.JSONProducer = runtime.JSONProducer()
+
+
+	mux := http.NewServeMux()
+	
+	// register swagger as a hendler
+	mux.Handle("/docs/", swagger)
+	
+	// otherwise serve the api
+	mux.Handle("/", api.Serve(nil))
+
+	server := http.Server{
+		Addr:    ":9091",
+		Handler: mux,
+	}
+
+	fmt.Println("starting server")
+	server.ListenAndServe()
+}
+```
+
+### As a middleware
 
 ```go
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
@@ -40,7 +80,7 @@ Themes, with exclusion of the default, are all sourced from [swagger-ui-themes](
 ## Development
 To remove the need to keep static web ui files in the repository, this project uses [statik](https://github.com/rakyll/statik) to embed the [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) npm package into the project source.
 
-A simple build script is included in the repository that can be used to resolve [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) from npm, copy and embed necessary files from the package. You will need to be running on a mac (macOS style `sed` is used) and npm installed in order for it to run.
+A simple build script is included in the repository that can be used to resolve [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) from npm, copy and embed necessary files from the package. You will need to be running on a mac (macOS style `sed` is used) and have npm and statik installed in order for it to run.
 
 
 
