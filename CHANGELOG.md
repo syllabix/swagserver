@@ -1,16 +1,10 @@
-# Changelog - v0.2.0
-#### Released Apr 28 2019
+# Changelog - v0.4.0
+#### Released Apr 25 2020
 
 
 ## Features
 
-feat: improved configurability, themes, performance
-
-feat: middleware serves swagger ui using configuration
-
-## Fixes / Minor Updates
-
-task: update swagger ui and move to go modules
+feat: update swagger ui and add example of http handler setup
 
 ## Release Contributors
 

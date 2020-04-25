@@ -11,7 +11,7 @@ go get github.com/syllabix/swagserver
 
 ### As a handler with a go swagger generated API
 
-```
+```go
 func main() {
 
 	// initialize a new swag server handler
