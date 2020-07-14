@@ -32,10 +32,10 @@ func main() {
 
 
 	mux := http.NewServeMux()
-	
+
 	// register swagger as a hendler
 	mux.Handle("/docs/", swagger)
-	
+
 	// otherwise serve the api
 	mux.Handle("/", api.Serve(nil))
 

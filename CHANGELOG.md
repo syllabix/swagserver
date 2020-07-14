@@ -1,11 +1,13 @@
-# Changelog - v0.4.0
-#### Released Apr 25 2020
+# Changelog - v0.6.0
+#### Released Jul 14 2020
 
 
 ## Features
 
-feat: update swagger ui and add example of http handler setup
+feat: update swagger ui
+
+
 
 ## Release Contributors
 
-Tom Stoepker <tom.stoepker@gmail.com>
+tom stoepker <tom@moali.io>
