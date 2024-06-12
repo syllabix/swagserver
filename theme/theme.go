@@ -6,11 +6,11 @@ type Name string
 // Themes for the swagger ui interface
 const (
 	Standard    Name = "swagger-ui"
-	FeelingBlue      = "theme-feeling-blue"
-	Flattop          = "theme-flattop"
-	Material         = "theme-material"
-	Monokai          = "theme-monokai"
-	Muted            = "theme-muted"
-	Newspaper        = "theme-newspaper"
-	Outline          = "theme-outline"
+	FeelingBlue Name = "theme-feeling-blue"
+	Flattop     Name = "theme-flattop"
+	Material    Name = "theme-material"
+	Monokai     Name = "theme-monokai"
+	Muted       Name = "theme-muted"
+	Newspaper   Name = "theme-newspaper"
+	Outline     Name = "theme-outline"
 )
