@@ -13,7 +13,7 @@ The corresponding swagger ui version is included in the swagserver [release note
 ## Setup and usage
 
 ```
-go get github.com/syllabix/swagserver
+go get github.com/syllabix/swagserver@latest
 ```
 
 ### As a handler with a go swagger generated API
