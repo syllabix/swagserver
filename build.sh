@@ -15,10 +15,12 @@ mkdir tmp
 echo "Copying swagger ui into the target tmp folder"
 FILES=(
     'index.html'
+    'index.css'
     'swagger-ui.css'
     'favicon-32x32.png'
     'favicon-16x16.png'
     'swagger-ui-bundle.js'
+    'swagger-initializer.js'
     'swagger-ui-standalone-preset.js')
 
 
