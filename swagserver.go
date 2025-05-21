@@ -1,7 +1,7 @@
-//go:generate statik -src=./tmp
 package swagserver
 
 import (
+	"embed"
 	"html/template"
 	"io"
 	"log"
@@ -9,11 +9,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/rakyll/statik/fs"
 	"github.com/syllabix/swagserver/config"
-
-	// This empty import is required to initialize the embedded swagger files
-	_ "github.com/syllabix/swagserver/statik"
 )
 
 // Middleware is a simple alias for a commonmiddle ware function signature, func(next http.Handler) http.Handler
@@ -26,13 +22,11 @@ const (
 		Please file an issue on github @ github.com/syllabix/swagserver`
 )
 
-func setup() (fileserver http.Handler, tmpl *template.Template, err error) {
-	statikFs, err := fs.New()
-	if err != nil {
-		return nil, nil, err
-	}
+//go:embed static/*
+var static embed.FS
 
-	swaggerui, err := statikFs.Open("/index.html")
+func setup() (fileserver http.Handler, tmpl *template.Template, err error) {
+	swaggerui, err := static.Open("/index.html")
 	if err != nil {
 		return nil, nil, err
 	}
@@ -44,7 +38,7 @@ func setup() (fileserver http.Handler, tmpl *template.Template, err error) {
 		return nil, nil, err
 	}
 
-	fileserver = http.FileServer(statikFs)
+	fileserver = http.FileServerFS(static)
 	tmpl, err = template.New("swaggerui").Parse(builder.String())
 	return
 }
