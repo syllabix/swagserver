@@ -84,6 +84,4 @@ Themes, with exclusion of the default, are all sourced from [swagger-ui-themes](
 
 ## Development
 
-To remove the need to keep static web ui files in the repository, this project uses [statik](https://github.com/rakyll/statik) to embed the [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) npm package into the project source.
-
-A simple build script is included in the repository that can be used to resolve [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) from npm, copy and embed necessary files from the package. You will need to be running on a mac (macOS style `sed` is used) and have npm and statik installed in order for it to run.
+This server embeds the [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) npm package into the project source using a //go:embed directive.
